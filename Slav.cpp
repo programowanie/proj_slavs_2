@@ -172,5 +172,6 @@ void Slav::Weapon()
 void Slav::GetWeapon(weaponParameters parameters, string name)
 {
 	_baseWeapPar = parameters;
+	_weapPar = parameters;
 	_weaponName = name;
 }

@@ -49,6 +49,7 @@ public:
 	//bronie
 	void Weapon();
 	weaponParameters weapParameters()	{ return _weapPar; }
+	weaponParameters weapParameters2()	{ return _baseWeapPar; }
 	string WeaponName() 				{ return _weaponName; }
 	string UltimateName() 				{ return _ultimateName; }
 	int WeaponRatio()					{ return _baseWeapPar.weapDamage *
@@ -75,4 +76,5 @@ public:
 	//int beastExp();
 	
 	string description();
+
 };

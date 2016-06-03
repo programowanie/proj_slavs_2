@@ -21,23 +21,23 @@ int main(int argc, char const *argv[])
 
 	srand(time(NULL));
 	//argc == 2 
-		//? atoi(argv[1]) 
-		//: 
-	
-	//tworze okresloną PARZYSTĄ ilość Slowian 16 dla przykładu
-	Slav slavs[16];
+	//int count = atoi(argv[1]) / 2;  
+	int count = 11;
+	if (count%2 != 0) count -= 1;
+	//tworze okresloną PARZYSTĄ ilość Slowian
+	Slav slavs[count];
 
 	int amount=0;
 	//wrzucam wszystkich Slowian do kolejki
 	queue <Slav> queueOfSlavs;
-	while (amount<=15)
+	while (amount < count)
 	{
 		queueOfSlavs.push(slavs[amount]);
 		amount++;
 	}
 
 	//prezentacja wszystkich Slowian
-	for (int i=0;i<=15;i++)	cout<<slavs[i].description()<<endl;
+	for (int i=0 ; i< count ; i++)	cout<<slavs[i].description()<<endl;
 
 	int j=1;
 	string winner;
@@ -119,18 +119,6 @@ int main(int argc, char const *argv[])
 					target[_target2].c_str(),
 					damage);
 
-				if (isLethal)
-				{
-					printf("%s wygrywa\n", slavs[whoHits].name().c_str());
-					winner = slavs[whoHits].name();
-					slavs[whoHits].lvlUp(slavs[1-whoHits].beastRatio());
-					slavs[whoHits].heal();
-					if (slavs[whoHits].WeaponRatio() > slavs[1-whoHits].WeaponRatio())
-						slavs[whoHits].GetWeapon(slavs[1-whoHits].weapParameters(), slavs[1-whoHits].WeaponName());
-					queueOfSlavs.push(slavs[whoHits]);	
-					break;
-				}
-				
 				//sprawdzenie warunków i uzycie superumiejetnosci
 				for(int i=0;i<2;i++)
 				{
@@ -151,7 +139,19 @@ int main(int argc, char const *argv[])
 							default:
 							break;
 						}
-				}		
+				}	
+
+				if (isLethal)
+				{
+					printf("%s wygrywa\n", slavs[whoHits].name().c_str());
+					winner = slavs[whoHits].name();
+					if (slavs[whoHits].WeaponRatio() > slavs[1-whoHits].WeaponRatio())
+						slavs[whoHits].GetWeapon(slavs[1-whoHits].weapParameters2(), slavs[1-whoHits].WeaponName());
+					slavs[whoHits].lvlUp(slavs[1-whoHits].beastRatio());
+					slavs[whoHits].heal();
+					queueOfSlavs.push(slavs[whoHits]);
+					break;
+				}	
 			}
 		}
 
@@ -159,4 +159,4 @@ int main(int argc, char const *argv[])
 
 
 	cout<<endl<<"ZWYCIEZCĄ TURNIEJU ZOSTAJE: "<<winner<<endl<<endl;
-}
+} 	
